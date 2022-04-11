@@ -1,21 +1,32 @@
 import time
 
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 
-path = 'K://pythonProject/venv/chromedriver-Windows'
+s = 'K://pythonProject/venv/chromedriver-Windows'
+driver = webdriver.Chrome(s)
 
-driver = webdriver.Chrome(path)
+# path = 'K://pythonProject/venv/chromedriver-Windows'
+# driver = webdriver.Chrome(path)
 
-driver.get('http://www.google.com/')
+# navigating to
+driver.get('https://www.salesmanago.pl/info/knowledgecenter.htm')
 
-time.sleep(5)  # Let the user actually see something!
+elems = driver.find_elements(By.XPATH, "//a[@href]")
 
-search_box = driver.find_element_by_name('q')
 
-search_box.send_keys('ChromeDriver')
+for elem in elems:
+    print(elem.get_attribute('href'))
 
-search_box.submit()
+# elems = driver.find_elements(By.CSS_SELECTOR, ".ebook__img--container [href]")
+# links = {elem.get_attribute('href') for elem in elems}
 
-time.sleep(5)  # Let the user actually see something!
+# printing length of total i.e total number of links
+# print(len(total))
+# print("Following are the link present in the webpage")
+# for totals in total:
+#     total.get_attribute("href")
+#     print(totals.text)
 
-driver.quit()
+driver.close()
