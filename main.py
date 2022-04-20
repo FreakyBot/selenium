@@ -26,8 +26,10 @@ elems = driver.find_elements(By.CSS_SELECTOR, "div.ebook__img--container a")
 search = input("Wpisz porzadana fraze e-booka lub ALL dla wylistowania linkow do e-bookow: ")
 
 if search.lower() == 'all':
+    temp = 0
     for elem in elems:
-        print(elem.get_attribute('href'))
+        print(temp, elem.get_attribute('href'))
+        temp += 1
     else:
         wybrany = int(input("Ktory index? : "))
         print("Wybrales link :", elems[wybrany].get_attribute('href'))
