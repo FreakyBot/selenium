@@ -43,11 +43,18 @@ if search.lower() == 'all':
         print("Wybrales link :", elems[wybrany].get_attribute('href'))
         driver.get(elems[wybrany].get_attribute('href'))
 elif search.lower() != 'all':
+    x = 0
     for a in driver.find_elements(By.CSS_SELECTOR, "div.ebook__img--container a"):
-        if search in a.get_attribute('href'):
-            print("Link : " + a.get_attribute('href'))
-            driver.get(a.get_attribute("href"))
-            break
+        while x == 0:
+            if search in a.get_attribute('href'):
+                print("Link : " + a.get_attribute('href'))
+                driver.get(a.get_attribute("href"))
+                x = 1
+                break
+            else:
+                search = input("Sprobuj innego wyrazenia: ")
+                x = 0
+
 
 # amazing_shopping_experience_new_knowledge.htm
 
