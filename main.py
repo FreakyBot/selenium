@@ -1,25 +1,33 @@
 import time
 
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.chrome.service import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+# ChromeDriver
 s = Service('/usr/bin/chromedriver')
 driver = webdriver.Chrome(service=s)
 
+# Destinated site
 driver.get("https://www.salesmanago.com/info/knowledgecenter.htm")
 
-wait = WebDriverWait(driver, 10)
+wait = WebDriverWait(driver, 20)
 
 # Accepting cookies
 element = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="close-cookies"]'))).click()
 
-# driver.switchTo().frame(driver.find_element(By.XPATH, '//*[@id="hubspot-messages-iframe-container'))
-# driver.find_element(By.CLASS_NAME("VizExNotificationBadge__Wrapper-b3snvh-0 kanpaf")).click()
-# driver.switchTo().defaultContent()
+# Closing live chat
+wait.until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//*[@id="hubspot-messages-iframe-container"]/iframe')))
+try:
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//*[@aria-label='Close live chat']"))).click()
+except TimeoutException as to:
+    print(to)
+
+driver.switch_to.default_content()
 
 elems = driver.find_elements(By.CSS_SELECTOR, "div.ebook__img--container a")
 
@@ -56,13 +64,9 @@ url = driver.find_element(By.NAME, 'url')
 url.send_keys('https://test.pl')
 
 phone = driver.find_element(By.NAME, 'phoneNumber')
-phone.clear()
-phone.click()
 phone.send_keys('732104858')
-time.sleep(3)
-phone.submit()
-# driver.find_element(By.CSS_SELECTOR, 'sm-form-submit').click()
 
-# download = driver.find_element(By.CSS_SELECTOR, "thanks-message").get_attribute('href')
+submit = driver.find_element(By.XPATH, '//*[@id="uspForm"]/div[2]/div/button')
+submit.click()
 
-# driver.close()
+driver.close()
