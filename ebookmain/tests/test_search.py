@@ -1,9 +1,7 @@
 from selenium import webdriver
-from ebook.result import EbookResult
-from ebook.home_page import EbookHomePage
 import pytest
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
+
 
 class TestResult:
 
