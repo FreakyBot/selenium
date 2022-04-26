@@ -7,8 +7,19 @@ class EbookResult:
         self.driver = driver
         self.ebook_xpath = "div.ebook__img--container a"
 
-    def get_url_links(self):
+    def search(self, search):
         ebooks = self.driver.find_elements(By.CSS_SELECTOR, self.ebook_xpath)
-        return [ebook.get_attribute('href') for ebook in ebooks]
+        ebooks_links = [ebook.get_attribute('href') for ebook in ebooks]
+        for ebook in ebooks_links:
+            if search in ebook:
+                print("Link " + ebook)
+                return self.driver.get(ebook)
+
+
+
+
+
+
+
 
 
