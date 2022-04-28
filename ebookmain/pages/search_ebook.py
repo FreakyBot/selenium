@@ -52,6 +52,9 @@ class SearchEbook:
     def download(self):
         self.driver.find_element(By.XPATH, self.search_download_file).click()
 
+    def check_live_chat(self):
+        return self.driver.find_element(By.XPATH, '//*[@id="hubspot-messages-iframe-container"]/iframe').is_displayed()
+
 
 
 
