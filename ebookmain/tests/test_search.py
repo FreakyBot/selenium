@@ -21,6 +21,7 @@ class TestResult(BaseTest):
         results_ebook = EbookResult(self.driver)
         search_ebook.close_cookies()
         search_ebook.closing_live_chat()
+        time.sleep(1)
         results_ebook.search(data.szukana_nazwa)
         search_ebook.input_name("test")
         search_ebook.input_email("jan.kowalski.benhauer+testrekrutacja@salesmanago.com")
@@ -28,8 +29,9 @@ class TestResult(BaseTest):
         search_ebook.input_url("https://test.pl")
         search_ebook.input_phonenumber("732104858")
         search_ebook.submit_button()
-        # self.driver.find_element(By.CSS_SELECTOR, '/html/body/main/div[2]/div/div[2]/div[2]/div/div/a[1]').click()'
-        time.sleep(5)
+        time.sleep(2)
+        # self.driver.find_element(By.CSS_SELECTOR, '/html/body/main/div[2]/div/div[2]/div[2]/div/div/a[1]').click()
+        time.sleep(2)
 
 
         # assert len(results_ebook.get_url_links(search=)) == "https://www.salesmanago.com/info/zero-party-data-revolution.htm"

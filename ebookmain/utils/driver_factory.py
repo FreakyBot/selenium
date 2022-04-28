@@ -10,6 +10,11 @@ class DriverFactory:
         if browser == "chrome":
             options = webdriver.ChromeOptions()
             options.add_argument("start-maximized")
+            options.add_experimental_option('prefs', {
+                "download.prompt_for_download": False,  # To auto download the file
+                "download.directory_upgrade": True,
+                "plugins.always_open_pdf_externally": False  # It will not show PDF directly in chrome
+            })
             return webdriver.Chrome(ChromeDriverManager().install(), options=options)
         elif browser == "firefox":
             options = webdriver.FirefoxOptions()
