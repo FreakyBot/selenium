@@ -1,2 +1,2 @@
 # Selenium project
-downloading file from site
+Downloading ebook from (https://www.salesmanago.com/info/knowledgecenter.htm)
